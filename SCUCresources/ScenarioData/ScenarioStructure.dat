@@ -1,0 +1,41 @@
+# Written by AMES01/02/2017 15:32:44
+
+set Stages := FirstStage SecondStage ;
+
+set Nodes :=
+RootNode
+ScenNode1
+;
+
+param NodeStage :=
+RootNode FirstStage
+ScenNode1 SecondStage
+;
+
+set Children[RootNode] :=
+ScenNode1
+;
+
+param ConditionalProbability :=
+RootNode 1.0
+ScenNode1 1.0
+;
+
+set Scenarios :=
+Scen1
+;
+
+param ScenarioLeafNode :=
+Scen1 ScenNode1
+;
+
+set StageVariables[FirstStage] :=  UnitOn[*,*] ;
+set StageVariables[SecondStage] :=  PowerGenerated[*,*]
+                                    MaximumPowerAvailable[*,*]
+                                    Angle[*,*]
+                                    LoadGenerateMismatch[*,*] ;
+
+param StageCostVariable := FirstStage  StageCost[FirstStage]
+                           SecondStage StageCost[SecondStage] ;
+
+param ScenarioBasedData := True ;

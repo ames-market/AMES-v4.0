@@ -1,0 +1,8 @@
+//A sample control file.
+CaseName : Base Load Profile
+NumZones : 8
+NumScenarios : 1
+MaxDay : 30
+Scenario 1 Prob : 1
+Scenario 1 File : 8BusBaseScenario1.dat
+ExpectedLoad : 8BusExpectedScenario.dat

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<!-- By default, only the Clean and Build commands use this build script. -->
+<!-- Commands such as Run, Debug, and Test only use this build script if -->
+<!-- the Compile on Save feature is turned off for the project. -->
+<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
+<!-- in the project's Project Properties dialog box.-->
+<project name="AMESMarket-v4.0" default="default" basedir=".">
+    <description>Builds, tests, and runs the project AMESMarket-v4.0</description>
+
+    <!-- Time Stamp -->
+    <tstamp prefix="time">
+        <format property="human" pattern="yyyy-MM-d" />
+    </tstamp>
+
+    <!-- Load the project commit-id -->
+    <property file="${basedir}/commit.properties" />
+    <!-- Set the default commit-id in case the commit.property file is missing -->
+    <property name="head.commit" value="HEAD" />
+
+    <!-- Load the version information -->
+    <property file="${basedir}/src/resources/version.properties" />
+    <property name="version.number"
+              value= "${version.major}.${version.minor}.${version.rev}" />
+
+    <property name="lcv.bin.dir" value="build/lcv-classes" />
+
+    <echo level="verbose">
+Building AMES testbed.
+Codename: ${version.codename}
+Version: ${version.number}
+Commit revision: ${head.commit}
+    </echo>
+
+    <import file="nbproject/build-impl.xml"/>
+
+    <!--
+
+    There exist several targets which are by default empty and which can be 
+    used for execution of your tasks. These targets are usually executed 
+    before and after some main targets. They are: 
+
+      -pre-init:                 called before initialization of project properties
+      -post-init:                called after initialization of project properties
+      -pre-compile:              called before javac compilation
+      -post-compile:             called after javac compilation
+      -pre-compile-single:       called before javac compilation of single file
+      -post-compile-single:      called after javac compilation of single file
+      -pre-compile-test:         called before javac compilation of JUnit tests
+      -post-compile-test:        called after javac compilation of JUnit tests
+      -pre-compile-test-single:  called before javac compilation of single JUnit test
+      -post-compile-test-single: called after javac compilation of single JUunit test
+      -pre-jar:                  called before JAR building
+      -post-jar:                 called after JAR building
+      -post-clean:               called after cleaning build products
+
+    (Targets beginning with '-' are not intended to be called on their own.)
+
+    Example of inserting an obfuscator after compilation could look like this:
+
+        <target name="-post-compile">
+            <obfuscate>
+                <fileset dir="${build.classes.dir}"/>
+            </obfuscate>
+        </target>
+
+    For list of available properties check the imported 
+    nbproject/build-impl.xml file. 
+
+
+    Another way to customize the build is by overriding existing main targets.
+    The targets of interest are: 
+
+      -init-macrodef-javac:     defines macro for javac compilation
+      -init-macrodef-junit:     defines macro for junit execution
+      -init-macrodef-debug:     defines macro for class debugging
+      -init-macrodef-java:      defines macro for class execution
+      -do-jar-with-manifest:    JAR building (if you are using a manifest)
+      -do-jar-without-manifest: JAR building (if you are not using a manifest)
+      run:                      execution of project 
+      -javadoc-build:           Javadoc generation
+      test-report:              JUnit report generation
+
+    An example of overriding the target for project execution could look like this:
+
+        <target name="run" depends="AMESMarket.RTM-impl.jar">
+            <exec dir="bin" executable="launcher.exe">
+                <arg file="${dist.jar}"/>
+            </exec>
+        </target>
+
+    Notice that the overridden target depends on the jar target and not only on 
+    the compile target as the regular run target does. Again, for a list of available 
+    properties which you can use, check the target you are overriding in the
+    nbproject/build-impl.xml file. 
+
+    -->
+
+    <!--=======================================================================
+         JUNIT Helpers
+        ====================================================================-->
+    <target depends="init" if="have.tests" name="test-report" description="Generate HTML based report">
+        <mkdir dir="${build.test.results.dir}" />
+        <junitreport todir="${build.test.results.dir}">
+            <fileset dir="${build.test.results.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report todir="${build.test.results.dir}/html"/>
+        </junitreport>
+    </target>
+
+    <!--======================================================================
+         target: -post-compile
+         desc: (re) copies version.properties with correct values substituted in
+        ===================================================================-->
+    <target name="-post-compile">
+        <copy-version-properties destdir="${build.classes.dir}"/>
+    </target>
+
+    <macrodef name="copy-version-properties">
+        <attribute name="destdir" default=""/>
+        <attribute name="srcdir" default="${src.src.dir}"/>
+        <sequential>
+            <copy todir="@{destdir}/resources"
+                  file="@{srcdir}/resources/version.properties"
+                  overwrite="yes">
+            <filterchain>
+                <replacetokens>
+                    <token key="TODAY" value="${time.human}" />
+                    <token key="COMMIT" value="${head.commit}" />
+                </replacetokens>
+            </filterchain>
+        </copy>
+        </sequential>
+    </macrodef>
+
+    <!--=======================================================================
+         target: -post-jar
+         desc: Finish up creating a jar file.
+               Copies the DATA folder into dist. Makes everything selfcontained
+               as a distributable file.
+        =====================================================================-->
+    <target name="-post-jar">
+        <!--Copy the DATA directory-->
+        <copy todir="${dist.dir}">
+            <fileset dir="${basedir}" includes="${DATA.dir}/**/*" />
+        </copy>
+
+        <!--TODO Only copy test data if not in build.release mode-->
+        <copy todir="${dist.dir}">
+            <fileset dir="${basedir}" includes="TEST-DATA/**/*" />
+        </copy>
+
+        <copy todir="${dist.dir}">
+            <fileset dir="${basedir}" includes="SCUCresources/**/*.py" />
+        </copy>
+
+        <!-- -copylibs target doesn't seem to be working.
+             hack to make sure we get them. -->
+        <copy todir="${dist.dir}">
+            <fileset dir="${basedir}" includes="lib/**/*.jar" />
+        </copy>
+
+    </target>
+
+    <!--=======================================================================
+         target: dist
+         desc: Create a archive with the compiled version of the project,
+         ready to run with java -jar. Set the propery build.release to do
+         a full release. Leave unset to get a snapshot release, tagged with
+         the git revision.
+        =====================================================================-->
+     <target name="dist" depends="jar"
+        description="Created binary archives suitable for distribution.
+Set the property build.release to do 'full' release. Otherwise, will be
+a snapshot release tagged with the commit id.">
+        <!--TODO: Make a property for the export folder-->
+
+        <property name="base.name" value="AMESMarket"/>
+        <condition property="version.info"
+            value="${version.codename}.${version.number}"
+            else="${version.codename}.${version.number}-${head.commit}">
+            <isset property="build.release"/>
+        </condition>
+
+        <property name="export.dir" value="${base.name}${version.info}"/>
+
+        <mkdir dir="${export.dir}"/>
+        <!-- Move all the distributable elements to the export folder-->
+        <!-- The elements needded for export are: jar and lib from dist, DATA dir and project description files-->
+        <!-- COPYRIGHT file with GPL or pointer to the GPL -->
+        <copy todir="${export.dir}">
+            <fileset dir="${dist.dir}">
+                <exclude name="README.TXT"/>
+            </fileset>
+            <fileset dir="${basedir}" includes="DATA/**/*" />
+            <!-- Project description files -->
+            <fileset dir="${basedir}"
+                includes="AMESMarketProjectSetupInfo.pdf,
+                AMESMarketReadMe.htm,
+                AMESVersionReleaseHistory.htm,
+                COPYING,
+                README
+                "/>
+        </copy>
+
+        <!-- Make a tar-ball -->
+        <tar compression="gzip" destfile="${export.dir}.tar.gz">
+            <tarfileset dir="${export.dir}" prefix="${export.dir}">
+                <include name= "**/*"/>
+            </tarfileset>
+        </tar>
+
+        <!-- Make a zip file -->
+        <zip destfile="${export.dir}.zip">
+            <zipfileset dir="${export.dir}" prefix="${export.dir}">
+                <include name= "**/*"/>
+            </zipfileset>
+        </zip>
+    </target>
+
+    <!--=======================================================================
+    Targets for building/packaging just the verifier.
+    =========================================================================-->
+    <target name="compile-lcv"
+            description="Compile the LoadCase verifier tool"
+            depends="init,-pre-pre-compile, -pre-compile">
+
+        <property name="src.dir" value="src" />
+
+        <mkdir dir="${lcv.bin.dir}" />
+
+        <!-- clean out old classes -->
+        <depend srcdir="${src.dir}"
+                destdir="${lcv.bin.dir}"
+                cache="depcache"
+                dump="true"
+                closure="yes"/>
+
+        <!-- TODO-XX Hook into the netbeans build infra-structure -->
+        <javac source="1.6"
+               target="1.6"
+               srcdir="${src.dir}"
+               destdir="${lcv.bin.dir}"
+               includes="amesmarket/filereaders/LoadCaseVerifier.java"
+               debug="true"
+               debuglevel="lines,vars,source"
+               includeantruntime="false" />
+       <copy-version-properties destdir="${lcv.bin.dir}" srcdir="${src.dir}"/>
+    </target>
+
+    <target name="jar-lcv" depends="compile-lcv" description="JAR the load case verifier.">
+        <!-- TODO-XX Hook into netbeans infrastructure. -->
+        <property name="lcv.jar" value="${dist.dir}/lcv.jar" />
+        <jar destfile="${lcv.jar}" basedir="${lcv.bin.dir}" includes="**/*">
+            <manifest>
+                <attribute name="Main-Class"
+                           value="amesmarket.filereaders.LoadCaseVerifier" />
+            </manifest>
+        </jar>
+    </target>
+</project>

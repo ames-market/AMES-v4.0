@@ -1,0 +1,749 @@
+<html>
+<head>
+<title> AMES Market Package (Leigh Tesfatsion) </title>
+</head>
+<body stylesrc="AMESMarketHome.htm" background="images/WhiteTextured2Bak.gif" text=#000000
+link=#306eff >
+<img src="images/blutexturedbar.gif" height="23" width=100%>
+
+<p>
+               <h1 align="center"> <font color="#306eff">
+                         The AMES Wholesale Power Market Testbed</h1> 
+                
+                <h2 align="center"> A Free Open-Source Computational Laboratory<br>
+                    for the Agent-Based Modeling of Electricity Systems
+                           </font></h2>
+
+
+
+<p>
+<table align=center border=0 cellpadding=1 cellspacing=1 width=100%>
+
+<tr>
+
+<td align=left width=75%>
+
+<dl>
+
+<p>
+<dt><b>Last Updated:</b> 29 January 2011
+                    
+<p><br>
+<dt><b>Site maintained by:</b>
+  <dd><a href="http://www.econ.iastate.edu/tesfatsi/">
+               <b>Leigh Tesfatsion</b></a><br>
+  <dd>Professor of Econ, Math, and ECpE<br>
+  <dd>Iowa State University<br>
+  <dd>Ames, Iowa 50011-1070<br>
+  <dd>http://www.econ.iastate.edu/tesfatsi/ <br>
+  <dd><img src="images/email.gif" align=middle>
+      <a href="mailto:tesfatsi@iastate.edu">
+              <b>tesfatsi AT iastate.edu</b></a> <br>
+</dl>
+
+<p><br>
+<dl>
+<dt> <a href="http://www.econ.iastate.edu/tesfatsi/ElectricOSS.htm">
+<img src="http://www.econ.iastate.edu/tesfatsi/images/backto.gif" align="top"></a>
+      <b>Electricity Market Open-Source Software</b>
+
+<dt> <a href = "http://ewh.ieee.org/cmte/psace/CAMS_taskforce/index.htm"> 
+<img src="http://www.econ.iastate.edu/tesfatsi/images/backto.gif" align="top"></a>
+       <b>IEEE Task Force on Open-Source Software</b>
+
+<dt> <a href="http://www.econ.iastate.edu/tesfatsi/ace.htm">
+<img src="http://www.econ.iastate.edu/tesfatsi/images/backto.gif" align="top"></a>
+      <b>Agent-Based Computational Economics (ACE)</b>
+
+<dt> <a href="http://www.econ.iastate.edu/tesfatsi/aelect.htm">
+<img src="http://www.econ.iastate.edu/tesfatsi/images/backto.gif" align="top"></a>
+      <b>ACE Electricity Research</b>
+
+<dt> <a href="http://www.econ.iastate.edu/tesfatsi/E3GroupISU.htm">
+<img src="http://www.econ.iastate.edu/tesfatsi/images/backto.gif" align="top"></a>
+      <b>ISU Electric Energy Economics (E3) Group</b>
+ 
+                       </dl>
+
+</td>
+
+
+<td align=left valign=top>
+<img src = "images/AMESfigure.jpg"
+    ALT="AMES Testbed Schematic"
+    height=412 width=350 align=middle><br>
+</td>
+
+
+</tr>
+</table>
+
+
+<p>
+<img src="images/blutexturedbar.gif" height="23" width=100%> <br>
+
+
+
+<p>
+                            <dl>
+<dt>
+<img src="images/warning.gif" align=bottom>
+<b> Software Release Disclaimer:</b>
+<dd>The <i>AMES Market Package</i> is our software implementation, in Java, of the AMES Wholesale Power Market Testbed.
+This software, provided below, is unsupported and provided as-is, without warranty of any kind.  
+                                  
+                          </dl>
+
+
+<p>
+<b>Table of Contents:</b>
+
+<p>
+<ul>
+<li><a href=  "#Overview">    <b>Software Overview</b></a>
+<li><a href=  "#Features">    <b>Software Features</b></a>
+<li><a href = "#Software">   <b>Software Downloads and Supporting Materials</b></a>
+           <ul>
+        <li><a href = "http://www.econ.iastate.edu/tesfatsi/AMESVersionReleaseHistory.htm">
+                    <b>Version Release History</b></a>
+        <li><a href = "#AMESVersion"> <b>Latest Version</b></a>
+                     <ul>
+<li><a href=  "#Available">    <b>Version Download</b></a>
+<li><a href=  "#Develop">      <b>Development Software</b></a>
+<li><a href=  "#SetUp">        <b>Set-Up Illustration for the NetBeans IDE</b></a>
+<li><a href=  "#ManTut">       <b>Manuals and Tutorials</b></a>
+
+                     </ul>                    
+          </ul>
+
+<li><a href = "#Licensing">  <b>Licensing Terms</b></a>
+<li><a href = "#Pubs">       <b>Publications and References</b></a>
+<li><a href = "#Acknowledge"><b>Acknowledgements</b></a>
+
+</ul>
+
+<p>
+<img src="images/bfadebar.gif" height="9" width=100%>
+
+<p>
+<h1> <img src="images/raincube.gif" width="25" height="19">
+<a name = "Overview">S</a>oftware Overview</h1>
+
+<p>
+The wholesale power market design proposed by the U.S. Federal Energy Regulatory Commission (FERC) in an April 2003 white paper 
+               <a href="#FERC2003"> 
+                 <b>[FERC 2003]</b></a>
+encompasses the following core features:  
+   <ul>
+<li> central management by an independent market operator; 
+<li> a two-settlement system consisting of a day-ahead market supported by a parallel real-time market to ensure continual balancing of supply and demand for power; 
+<li> management of grid congestion by means of locational marginal pricing (LMP), i.e., the pricing of power by the location and timing of its injection into, or withdrawal from, the transmission grid; 
+<li> market power oversight and mitigation.  
+</ul>
+
+<p>
+Versions of FERC’s wholesale power market design have been implemented (or scheduled for implementation) in U.S. energy regions in the Midwest (MISO), New England (ISO-NE), New York (NYISO), the mid-Atlantic states (PJM), California (CAISO), the southwest (SPP), and Texas (ERCOT).  Nevertheless, strong criticism of the design persists.  Part of this criticism stems from the concerns of non-adopters about the suitability of the design for their regions due to distinct local conditions (e.g., hydroelectric power in the northwest).   Even in regions adopting the design, however, criticisms continue to be raised about market performance. 
+
+<p>
+One key problem for participants in wholesale power markets restructured in accordance with FERC’s design is a lack of full transparency regarding market operations.  Due in great part to the complexity of the market design in its various actual implementations, the business practices manuals and other public documents released by market operators are daunting to read and difficult to comprehend.  Moreover, in many energy regions (e.g., MISO), data is only posted in partial and masked form with a significant time delay.   The result is that many participants are wary regarding the efficiency, reliability, and fairness of market protocols (e.g., settlement practices and market power mitigation rules).  Moreover, outsiders (e.g., university researchers) are hindered from subjecting the design to systematic testing in an open and impartial manner. 
+
+<p>
+As elaborated in 
+         <a href = "#SunTes2007a">
+        <b>Sun and Tesfatsion (2007a)</b></a>,
+       <a href = "#SunTes2007b">
+        <b>Sun and Tesfatsion (2007b)</b></a>, and
+        <a href = "#LiSunTes2009a">
+        <b>Li, Sun, and Tesfatsion (2009)</b></a>,
+the <b>AMES Wholesale Power Market Testbed</b> is being developed as a “simple but not too simple” computational laboratory for the systematic experimental study of wholesale power markets restructured in accordance with FERC's market design. AMES is an acronym for <b><i>A</i></b>gent-based <b><i>M</i></b>odeling of <b><i>E</i></b>lectricity <b><i>S</i></b>ystems. 
+
+<p>
+Our objective is the facilitation of research, teaching, and training, not commercial-grade application.  The release of AMES as an open-source package is intended to encourage the cumulative development of this testbed by others (as well as ourselves) in directions appropriate for their specific needs.  
+
+<p>
+The release of AMES is also intended to encourage continual dialog with market stakeholders and regulators leading to successive refinements and improvements of the testbed. To further these purposes, AMES has been constructed (in Java) to have an extensible modular architecture and an easily-navigated graphical user interface (GUI). 
+
+<p>
+The following section discusses the core features of AMES in greater detail.   
+
+
+<p>
+<img src="images/bfadebar.gif" height="9" width=100%>
+
+<p>
+<h1>
+<img src="images/raincube.gif" width="25" height="19">
+<a name = "Features">S</a>oftware Features </h1>
+
+
+<p>
+The latest version release AMES(V2.05) of the AMES Market Package incorporates, in simplified form, core features of FERC's proposed wholesale power market design.  Below is a summary description of the logical flow of events in AMES(V2.05):
+
+
+                          <ul>
+
+<p>
+<li>
+The AMES wholesale power market operates over an AC transmission grid starting on day 1
+and continuing through a user-specified maximum day (unless terminated earlier
+in accordance with a user-specified stopping rule).  Each day D consists of 24 successive hours 
+H = 00,01, ...,23.  
+    
+<p>
+<li>
+The AMES wholesale power market includes an <i>Independent System Operator (ISO)</i> and a collection of energy traders consisting of <i>Load-Serving Entities (LSEs)</i> and <i>Generation Companies (GenCos)</i> distributed across the buses of the transmission grid.  Each of these entities is implemented as a software program encapsulating both methods and data.
+
+<p>
+<li> 
+The objective of the ISO is the reliable attainment of <i>operational efficiency</i> for the wholesale power market subject to generation and transmission constraints.  In an attempt to attain this objective, the ISO undertakes the daily operation of a <i>day-ahead market</i> settled by means of <i>locational marginal pricing (LMP)</i>, i.e., the determination of prices for electric power in accordance with both the locating and timing of its injection into, or withdrawal from, the transmission grid.  
+
+
+
+<p>
+<li>
+The objective of each LSE is to secure power for its downstream (retail) customers.  During the morning of each day D, each LSE reports a demand bid to the ISO for the day-ahead market for day D+1. Each demand bid consists of two parts: a <i>fixed demand bid</i> (i.e., a 24-hour load profile); and 24 <i>price-sensitive demand bids</i> (one for each hour), each consisting of a linear demand function defined over a purchase capacity interval. LSEs have no learning capabilities; LSE demand bids are user-specified at the beginning of each simulation run. 
+
+
+<p>
+<li>
+The objective of each GenCo i is to secure for itself the highest possible net earnings each day.  During the morning of each day D, each GenCo i uses its current action choice probabilities to choose a <i>supply offer</i> from its action domain ADi to report to the ISO for use in all 24 hours of the day-ahead market for day D+1. Each supply offer in ADi consists of a linear marginal cost function defined over an operating capacity interval. GenCo i's ability to vary its choice of a supply offer from ADi permits it to adjust the ordinate/slope of its reported marginal cost function and/or the upper limit of its reported operating capacity interval in an attempt to increase its daily net earnings.
+   
+<p>
+<li>
+After receiving demand bids from LSEs and supply offers from GenCos during the morning of day D, the ISO determines and publicly reports hourly power supply commitments and LMPs for the day-ahead market for day D+1 as the solution to hourly bid/offer-based <i>DC optimal power flow (DC-OPF)</i> problems. <i>Transmission grid congestion</i> is managed by the inclusion of congestion cost components in LMPs.
+
+<p>
+<li>
+At the end of each day D, the ISO settles all of the commitments for the day-ahead market for day D+1 on the basis of the LMPs for the day-ahead market for day D+1.  
+
+<p>
+<li>
+At the end of each day D, each GenCo i uses <i>stochastic reinforcement learning</i> to upate the action choice probabilities currently assigned to the supply offers in its action domain ADi, taking into account its day-D settlement payment.
+
+<p>
+<li>
+There are no system disturbances (e.g., weather changes) or shocks (e.g., forced generation outages or line outages).  Consequently, the binding financial contracts determined in the day-ahead market are carried out as planned and traders have no need to engage in real-time (spot) market trading.
+
+<p>
+<li>
+Each LSE and GenCo has an initial holding of money that changes over time as it accumulates earnings and losses. 
+
+<p>
+<li>
+There is no entry of traders into, or exit of traders from, the wholesale power market.  LSEs and GenCos are currently allowed to go into debt (negative money holdings) without penalty or forced exit. 
+             
+
+</ul>
+
+
+<p>
+The essential idea of stochastic reinforcement learning is that the probability of choosing an action should be increased (reinforced) if the corresponding reward is relatively good and decreased if the corresponding reward is relatively poor.   Each AMES GenCo determines its supply offer choices for the day-ahead market by means of VRE reinforcement learning, a variant of a stochastic reinforcement learning algorithm developed by Alvin Roth and Ido Erev on the basis of human subject experiments. The user can select either "daily profit" (revenues minus total cost) or
+"daily net earnings" (revenues minus <i>avoidable</i> cost)   
+as the measure for each GenCo's daily "reward." The user can also 
+tailor the settings of each GenCo's learning parameter values to its situation, in particular to its cost attributes, its operating capacity limits, and its anticipated net earnings. 
+Each GenCo's VRE learning is implemented by means of a free open-source <i>Java Reinforcement Learning Module (JReLM)</i> developed by  
+                     <a href = "#Gieseler2005">
+                      <b>Gieseler (2005)</b></a>.
+
+ 
+<p>
+At the beginning of each run with learning GenCos, a <i>competitive equilibrium benchmark</i> is first calculated off line in which the GenCos' true cost and capacity attributes are used to solve for LMPs and power commitments.  Comparing subsequent market outcomes under learning with competitive equilibrium benchmark outcomes permits the calculation of standard market performance measures such as market efficiency and market power.
+
+<p>
+The ISO determines hourly power-supply commitments and LMPs for the day-ahead market by solving hourly bid/offer-based DC optimal power flow (DC-OPF) problems that approximate underlying AC-OPF problems. The ISO solves its DC-OPF problems by invoking an accurate and efficient DC-OPF solver, <b><i>DCOPFJ</i></b>,   
+incorporated into AMES. Developed in Java by 
+              <a href = "#SunTes2007c">
+              <b>Sun and Tesfatsion (2007c)</b></a>,
+the
+    <a href = "http://www.econ.iastate.edu/tesfatsi/DCOPFJHome.htm">
+                     <b>DCOPFJ package</b></a> 
+is free open-source software that can be used either as part of a Java application or as a stand-alone DC-OPF solver.
+Specifically, AMES incorporates 
+             <a href = "http://www.econ.iastate.edu/tesfatsi/DCOPFJHome.htm#DCOPFJV2.0">
+                      <b>DCOPFJ(V2.0)</b></a> 
+as the ISO's solver for DC optimal power flow problems.  DCOPFJ(V2.0) is a generalization of DCOPFJ(V1.0) that permits LSEs to submit price-sensitive as well as fixed demands to the ISO for the day-ahead market.
+
+
+
+<p> 
+The ISO is concerned about loss of operational efficiency due to the possible exercise of "market power" by GenCos through strategic reporting of supply offers.  Specifically, a GenCo has <i>market power</i> if the GenCo can increase its net earnings (relative to the competitive benchmark) either by reporting a higher-than-true marginal cost function or by reporting a less-than-true upper operating capacity limit.  As one possible approach to GenCo market power mitigation, the ISO can impose a <i>supply-offer price cap (PCap)</i>. Under such a policy, the maximum sale price reported by any GenCo cannot exceed PCap.
+
+
+<p>
+The user can control the length of each simulation run by choosing to set (or not) any combination of the following five stopping rules: (1) stop when a specified maximum day is reached; (2) stop when each GenCo is choosing a single supply offer with a probability that exceeds a user-specified theshold probability; (3) stop when the probability distribution used by each GenCo to select its supply offers has stabilized to within a user-specified threshold for a user-specified number of days; (4) stop when the supply offer selected by each GenCo has stabilized to within a user-specified threshold for a user-specified number of days; and/or (5) stop when the net earnings of each GenCo have stabilized to within a user-specified threshold for a user-specified number of days.  When multiple stopping rules are flagged, the simulation run terminates as soon as any one of the flagged stopping rules is satisfied.  
+
+<p>
+AMES has a graphical user interface (GUI) with separate screens for carrying out the following functions: (a) creation, modification, analysis and storage of case studies in either single-run and batched-run mode; (b) initialization and editing of the attributes of the transmission grid; (c) individualized initialization and editing of the attributes of Load-Serving Entities (LSEs) and GenCos; (d) individualized specification of parameter values for the learning method of each GenCo; (e) activation (or not) of a user-specified value for an ISO-imposed supply-offer price cap; (f) specification of simulation controls (e.g., stopping rules); and (f) customizable output reports in the form of both table and chart displays.
+
+
+<p>
+Finally, AMES includes two test cases that can be used as templates for new case studies.  The first test case is a dynamic extension of a static 5-bus example by 
+                <a href = "#JL2002">
+                   <b>John Lally (2002, Section 6)</b></a>
+now used extensively in ISO-NE/PJM training manuals.  The second test case is a dynamic extension of the static IEEE 30-bus system presented in an appendix (Section D.4, pp. 477-478) of   
+                       <a href = "#SYZ2002">
+                      <b>Shahidehpour et al. (2002)</b></a>.
+
+
+<p>
+It is hoped that the free open-source release of AMES will encourage the cumulative development of future versions with enhanced features critical for determining the performance of real-world restructured electricity markets.  Examples of such enhanced features include:
+
+                                             <ul>
+
+<p>
+<li>  possibility of shocks to the system leading to differences arising between day D-1 financial contracts and day D 
+required transactions that must be settled in the day-D real-time market at real-time LMPs
+(active two-settlement system). 
+
+<li>  enhanced transmission grid features. 
+
+<li>  incorporation of an AC OPF solver to permit DC vs. AC OPF error comparisons. 
+
+<li>  enhanced modeling of ISO-managed unit commitment taking into account start-up costs, down-time constraints, and ramping constraints. 
+
+<li>  security constraints incorporated into DC/AC OPF problem formulations as a hedge against system disturbances. 
+
+<li>  ISO-managed resource adequacy assessment. 
+
+<li>  emission constraints and other mandated environmental protection measures. 
+
+<li>  upstream fuel markets permitting more empirically-based derivations of cost functions for GenCos. 
+
+<li>  incorporation of demand-bid learning capabilities for LSEs.
+
+<li>  additional types of learning methods for potential use by GenCos and LSEs (e.g. anticipatory learning).
+
+<li>  inclusion of bankruptcy rules to handle situations in which one or more traders use up all of their liquid assets.
+
+<li>  a financial transmission rights market to permit hedging against transmission congestion costs. 
+
+<li>  bilateral trading to permit longer-term contracting. 
+
+<li>  downstream retail markets permitting more empirically-based derivations of LSE demand bids [cf. <a href = "#WST2006"><b>Widergren, Sun, and Tesfatsion (2006)</b></a>].
+
+
+</ul>
+
+
+
+
+<p>
+<img src="images/bfadebar.gif" height="9" width=100%>
+
+<p>
+<h1> <img src="images/raincube.gif" width="25" height="19">
+<a name = "Software">S</a>oftware Downloads and Supporting Materials</h1>
+
+                
+<p>
+Detailed instructions are provided below for downloading, compiling, and running AMES(V2.05). Explanations of the modifications incorporated into successive versions released to date can be obtained at the
+              <a href = "http://www.econ.iastate.edu/tesfatsi/AMESVersionReleaseHistory.htm">
+                           <b>Version Release History Site</b></a>.
+
+<p>
+<img src="images/elegline.gif" height=2 width=100%> 
+
+
+<p>
+<h2>
+<img src="images/grnshbll.gif">
+<b><a name = "AMESVersion">A</a>MES Market Package--Version 2.05 (Li, Sun, and Tesfatsion)</b></h2>
+
+
+                                   <ul>
+
+<p>
+<li><h3><b><a name = "Available">V</a>ersion Download</b></h3> 
+
+
+                      <dl>
+                                  
+<p>
+<dd>Hongyan Li, Junjie Sun, and Leigh Tesfatsion, <b>AMES Market Package--Version 2.05</b>
+             <a href = "http://www.econ.iastate.edu/tesfatsi/AMESMarket.V2.05.zip">
+                                  <b>(zipfile,3.5M)</b></a>.
+Release Date: 14 September 2009
+
+                     </dl>
+
+
+
+<p>
+<li><h3><b><a name = "Develop">D</a>evelopment Software</b></h3> 
+
+<dl>
+
+<p>
+<dd>
+The following free open-source software was used to support the development of AMES(V2.05).  
+
+
+<p>
+ 
+<ol>
+<li>  <b>Java platform:</b> For Java SE Development Kit (JDK) 6 update 1 (6u1) or higher, visit the 
+          <a href = "http://java.sun.com/javase/downloads/index.jsp">
+                <b>Java SE Downloads Page</b></a>.
+You can download JDK 6u1 (or higher) either alone or in combination with the NetBeans Integrated Development Environment (IDE) 6.0 (or higher).
+
+<li> <b>Java IDE:</b> For NetBeans IDE 6.0 (or higher), visit the
+               <a href = "http://www.netbeans.org/">
+                   <b>NetBeans Homepage</b></a>.
+You can also download the Java SE Development Kit (JDK) 6u1 (or higher) with the NetBeans IDE from the linked download page. The NetBeans IDE is a powerful open-source cross-platform  tool for Java programming.  
+
+
+<p>
+<b>IMPORTANT NOTE:</b>  JAR (Java archive) files for the following support software for AMES(V2.05) are included in the library directory as part of the AMES download and do not need to be separately downloaded in order to compile and run AMES(V2.05).
+
+<p>
+<li> <b>Java Chart Library:</b> JFreeChart
+   <a href = "http://www.jfree.org/jfreechart/index.html">
+            <b>(Download Page)</b></a>.
+<li> <b>Repast J:</b> A Java Agent-Based Toolkit, Version 3.1
+       <a href = "http://repast.sourceforge.net/repast_3/download.html">
+                    <b>(Download page)</b></a>.
+For an on-line self-study guide for Repast J and Java, visit 
+         <a href = "http://www.econ.iastate.edu/tesfatsi/repastsg.htm"> 
+                     <b>here</b></a>.
+<li><b>JReLM (Java Reinforcement Learning Module):</b> Open-source software for use with Repast J developed by Charles Gieseler:  
+<a href = "http://www.econ.iastate.edu/tesfatsi/JReLM_source.zip">
+          <b>Source Code (zip,110K)</b></a>;
+<a href = "http://www.econ.iastate.edu/tesfatsi/JReLM_Javadocs.zip">
+          <b>Javadocs (zip,363K)</b></a>;
+<a href = "http://www.econ.iastate.edu/tesfatsi/CharlesGieseler_thesis.pdf">
+          <b>M.S. Thesis (pdf,1.1M)</b></a>;
+<a href = "http://www.econ.iastate.edu/tesfatsi/CharlieGieseler_thesisPresentation.pdf">
+          <b>Thesis Slide Presentation (pdf,1.1M)</b></a>.
+
+
+<li><b>DCOPFJ (DC-OPF Solver in Java):</b> A free open-source solver for DC optimal power flow
+problems.  For software downloads and manual materials, visit
+       <a href = "http://www.econ.iastate.edu/tesfatsi/DCOPFJHome.htm">
+                 <b>here</b></a>.
+
+</ol>
+
+</dl>
+
+<p>
+<li><h3><b><a name = "SetUp">S</a>et-Up Illustration for the NetBeans Integrated Development Environment (IDE)</b></h3> 
+
+<p>
+<b>IMPORTANT NOTE:</b> Similar set-up instructions apply for other Java IDEs such as Eclipse.
+
+<dl>
+                            <ul>
+<p>
+<li>The first step is to install JDK 6u1 (or higher) either separately or in combination with the NetBeans IDE (6.0 or higher). Please note that JDK 6u1 (or higher) is <i>required</i> for the AMES(V2.05) code to run correctly.  Error messages will be generated if you attempt to compile the AMES(V2.05) code with any earlier JDK release.  
+
+<p>
+<li>The second step is to install the NetBeans IDE (6.0 or higher) if you have not already done so in step one.  
+
+<p>
+<li>
+The final step is then to use the NetBeans IDE to create a standard NetBeans project using the contents of the data ("DATA") directory, required library ("lib") directory, and source code ("src") directory extracted from the above AMES(V2.05) zip file.  <b><i>All</i></b> Java archive ("jar") files in the lib directory extracted from 
+the AMES(V2.05) zip file must be included in the required library for your AMES(V2.05) project in order for the AMES(V2.05) code to run correctly. 
+
+<p>
+<li>
+Note in particular that a jar file for Repast J 3.1 (repast.jar) is included in the lib directory extracted from 
+the AMES(V2.05) zip file.  Consequently, Repast J 3.1 does not have to be separately downloaded and installed unless you are planning to undertake code development for parts of the AMES(V2.05) code involving Repast J and you would like to have access to RePast J debugging facilities. 
+
+
+<p>
+<li> Detailed step-by-step instructions for setting up and running AMES(V2.05) as a standard NetBeans project using the NetBeans IDE (6.0 or higher) are provided in the following
+       <a href = "http://www.econ.iastate.edu/tesfatsi/AMESMarketProjectSetUpInfo.pdf">
+      <b>Basic AMES Instructions Manual (pdf,632K)</b></a>.
+
+<p>
+<li>
+After your AMES(V2.05) project compiles, you can use entries in appropriate AMES GUI screens to load and run the provided 5-bus and 30-bus test cases, to experiment with changes in the parameter settings for these test cases, and/or to develop and run new cases.  Event handlers are now in place to handle problematic parameter settings resulting in "inadequacy events" (supply less than demand) for some hours of the day-ahead market.  Nevertheless, care must still be taken because empirically implausible data entries will result in empirically implausible outcomes ("garbage in, garbage out").   
+
+
+                              </ul>
+
+  </dl>    
+
+
+<p>
+<li><h3><b><a name = "ManTut">M</a>anuals and Tutorials</b></h3>
+
+                 <ul>
+
+<p>
+<li>
+<b>Basic AMES Instructions Manual</b>
+<a href = "http://www.econ.iastate.edu/tesfatsi/AMESMarketProjectSetUpInfo.pdf">
+                        <b>(pdf,632K)</b></a>
+                          <dl>
+<dd><b><i>Abstract:</i></b>
+Topics covered in this basic manual include: Basic Project Set-Up Info; Loading and Viewing AMES Test Cases; Development of New AMES Test Cases; AMES Source Code Modification; Running AMES Experiments in Batch Mode.
+                          </dl>
+
+
+<p>
+<li><b>"The AMES Wholesale Power Market Testbed: Project Description"</b>
+         <a href = "http://www.econ.iastate.edu/tesfatsi/AMESMarketProject.pdf">
+            <b>(ppt,2.6M)</b></a>
+                      <dl>
+<dd><b><i>Abstract:</i></b>
+ This slide presentation giving a summary overview of the AMES Wholesale Power Market Testbed together with illustrative experimental results.
+                        </dl>
+
+
+<p>
+<li><b>"The AMES Wholesale Power Market Testbed: Package Class Diagrams"</b>
+  <a href = 
+"http://www.econ.iastate.edu/tesfatsi/AMESPackageClassDiagrams.pdf">
+            <b>(ppt,2.5M)</b></a>
+                      <dl>
+<dd><b><i>Abstract:</i></b>
+ These slides display class diagrams for (1) the basic AMES classes and  (2) the AMES graphical user interface (GUI).
+                        </dl>
+
+
+<p>
+<li><b>"Introductory Notes on Agent-Based Modeling, Agent-Oriented Programming, and the AMES Wholesale Power Market Testbed"</b>
+         <a href = "http://www.econ.iastate.edu/tesfatsi/ABMAOPAMES.LT.pdf">
+            <b>(ppt,4.3MK)</b></a>
+                        
+<p>
+<li><b>"Introductory Notes on DC-OPF Dispatch and LMP Solutions in the AMES Wholesale Power Market Testbed"</b>
+         <a href = "http://www.econ.iastate.edu/tesfatsi/AMESLMPDetermination.LT.pdf">
+            <b>(ppt slides,532K)</b></a>,
+<a href = "http://www.econ.iastate.edu/tesfatsi/DCOPFInAMES.LT.pdf">
+            <b>(Notes,207K)</b></a>,
+
+
+<p>
+<li> Hongyan Li and Leigh Tesfatsion, <b>"The AMES Wholesale Power Market Testbed: A Computational Laboratory for Research, Teaching, and Training"</b>
+<a href = "http://www.econ.iastate.edu/tesfatsi/AMESTestBed.2009IEEEPESGM.pdf">
+           <b>(pdf,930K)</b></a>,
+<i>Proceedings of the IEEE Power and Energy Society General Meeting</i>, Calgary, Alberta, CA, July 26-30, 2009. 
+
+<p>
+<li>Hongyan Li, Junjie Sun, and Leigh Tesfatsion, <b>"Separation and Volatility of Locational Marginal Prices in Restructured Wholesale Power Markets"</b>
+              <a href = "http://www.econ.iastate.edu/tesfatsi/LMPSeparationVolatility.LST.pdf"> 
+               <b>(pdf,2.3M)</b></a>,
+ISU Economics Working Paper #09009, Latest Revision March 2010.
+        
+                      <dl>
+  <dd><b><i>Abstract:</i></b>
+This study uses the default dynamic 5-bus test case downloaded with AMES (V2.05) as the benchmark starting point for an investigation of separation and volatility of locational marginal prices (LMPs) in an ISO-managed restructured wholesale power market. Particular attention is focused on the dynamic and cross-sectional response of LMPs to systematic changes in demand-bid price sensitivities and supply-offer price cap levels under varied learning specifications for the generation companies. Also explored is the extent to which the supply offers of the marginal (price-determining) generation companies induce correlations among neighboring LMPs. 
+                 </dl>
+
+<p>
+<li>Junjie Sun and Leigh Tesfation, <b>"DC-OPF Formulation with Price-Sensitive Demand Bids"</b>
+<a href = "http://www.econ.iastate.edu/tesfatsi/DC-OPF.PriceSensitiveDemandBids.pdf">
+    <b>(pdf,154K)</b></a>,
+Working Paper, Economics Department, Iowa State University, March 2008.
+     <dd><b><i>Abstract:</i></b> These notes cover the following technical topics for AMES(V2.05): (1) representations for GenCo cost functions and LSE demand functions; (2) DC-OPF Problem in Structural Form; (3) DC-OPF Problem in Matrix Form; and (4) illustrative 5-Node Example. 
+
+<p>
+<li>Leigh Tesfatsion, <b>"The AMES Wholesale Power Market
+ Testbed as a Stochastic Dynamic State-Space Game"</b>
+        <a href = "http://www.econ.iastate.edu/tesfatsi/AMESStateSpaceModel.pdf">
+                      <b>(pdf,2.8M)</b></a>,
+Working Paper, Economics Department, Iowa State University, July 2008. 
+    <dl>
+    <dd> <b>Abstract:</b> These notes show how the AMES Wholesale Power Market Testbed can be recast in more standard state-space equation form.  The result is a highly nonlinear and highly coupled system of first-order stochastic difference equations.  The AMES state-space equation representation is used to explain how AMES constitutes an open-ended dynamic game among multiple strategically-learning players.  It is also used to explain how AMES permits the development and experimental study of a wide variety of test cases.
+  </dl>
+
+ 
+                  </ul>
+
+                  </ul>
+
+
+
+
+<p>
+<img src="images/bfadebar.gif" height="9" width=100%>
+
+
+<p>
+<h1> <img src="images/raincube.gif" width="25" height="19">
+<a name = "Licensing">L</a>icensing Terms</h1>
+
+                      <dl>
+               
+<p>
+<dd>
+AMES(V2.05) is licensed by the copyright holders (Hongyan Li, Junjie Sun, and Leigh Tesfatsion) as free open-source software under the terms of the
+        <a href="http://www.gnu.org/licenses/licenses.html">
+                         <b>GNU General Public License (GPL)</b></a>.
+Anyone who is interested is allowed to view,
+modify, and/or improve upon the code used to produce this package, but any
+software generated using all or part of this code must be released as free open-source
+software in turn. The GNU GPL can be viewed in its entirety
+         <a href="http://www.gnu.org/licenses/gpl.html">
+                    <b>here</b></a>. 
+
+                 </dl> 
+
+<p>
+<img src="images/bfadebar.gif" height="9" width=100%>
+
+<p>
+<h1> <img src="images/raincube.gif" width="25" height="19">
+<a name = "Pubs">P</a>ublications and References</h1>
+
+
+                      <ul>
+
+<p>
+<li><a name = "FERC2003">FERC (2003)</a>, <b>Notice of White Paper</b>, U.S. Federal Energy Regulatory Commission, April.
+
+
+<p>
+<li> Charles Gieseler (2005), <b>"A Java Reinforcement Learning Module for the Repast Toolkit: Facilitating Study and Implementation with Reinforcement Learning in Social Science Multi-Agent Simulations"</b>
+     <a href = "http://www.econ.iastate.edu/tesfatsi/CharlesGieseler_thesis.pdf">
+              <b>(pdf,1.1M)</b></a>,
+      <a href = "http://www.econ.iastate.edu/tesfatsi/CharlieGieseler_thesisPresentation.pdf">
+                <b>(ppt,1.1M)</b></a>,
+Department of Computer Science, Iowa State University, M.S. Thesis.
+
+<p>
+<li>Deddy Koesrindartoto and Leigh Tesfatsion (2004), <b>"Testing the Reliability of FERC's Wholesale Power Market Platform: An
+Agent-Based Computational Economics Approach"</b> 
+ <a href = "http://www.econ.iastate.edu/tesfatsi/usaeetalk.pdf">
+                 <b>(pdf,45K)</b></a>,
+<i>Energy, Environment, and Economics in a New Era</i>, Proceedings of the
+24th USAEE/IAEE North American Conference, Washington, D.C., July 8-10.  
+
+
+<p>
+<li>Deddy Koesrindartoto, Junie Sun, and Leigh Tesfatsion (2005), <b>"An Agent-Based Computational Laboratory for Testing the Economic Reliability of Wholesale Power Market Designs"</b> 
+ <a href = "http://www.econ.iastate.edu/tesfatsi/ieeepow.pdf">
+                 <b>(pdf,112K)</b></a>,
+<i>Proceedings of the IEEE Power and Energy Society General Meeting</i>, San Francisco, California, June 12-16, pp. 931-936.
+
+
+<p>
+<li><a name = "JL2002">John Lally (2002), <b>"Financial Transmission Rights: Auction Example,"</b> in <i>Financial Transmission Rights Draft 01-10-02</i>, m-06 ed., ISO New England, Inc., January.
+
+<p>
+<li>
+Hongyan Li and Leigh Tesfatsion, <b>"ISO Net Surplus Collection and Allocation in Wholesale Power Markets Under Locational Marginal Pricing"</b>
+  <a href = "http://www.econ.iastate.edu/tesfatsi/ISONetSurplus.WP09015.pdf">
+             <b>(Working Paper Version,pdf,819K)</b></a>,
+<i>IEEE Transactions on Power Systems</i>, Vol. 26, to appear.
+<a href = "http://dx.doi.org/10.1109/TPWRS.2010.2059052">
+         <b>(DOI Location)</b></a>
+
+  
+<p>
+<li>Hongyan Li and Leigh Tesfatsion, <b>"Development of Open Source Software for Power Market Research: The AMES Test 
+Bed"</b>
+  <a href = "http://www.econ.iastate.edu/tesfatsi/OSS_AMES.2009.pdf">
+             <b>(pdf preprint,628K)</b></a>,
+<i>Journal of Energy Markets</i>, Vol. 2, No. 2, Summer 2009, 111-128.
+
+      
+
+<p>
+<li>
+Hongyan Li and Leigh Tesfatsion (2009), <b>"Capacity Withholding in Restructured Wholesale Power Markets: An Agent-Based Testbed Study"</b>
+    <a href = "http://www.econ.iastate.edu/tesfatsi/CapacityWithholding.PSCE2009.LiTesfatsion.pdf">
+                  <b>(pdf,2.3M)</b></a>,
+<i>Proceedings of the IEEE Power Systems Conference & Exposition (PSCE)</i>, Seattle, WA, March 15-18, 2009.
+   
+
+<p>
+<li><a name = "LiSunTes2009a">Hongyan Li, Junjie Sun, and Leigh Tesfatsion (2009)</a>,Hongyan Li, Junjie Sun, and Leigh Tesfatsion, <b>"Separation and Volatility of Locational Marginal Prices in Restructured Wholesale Power Markets"</b>
+              <a href = "http://www.econ.iastate.edu/tesfatsi/LMPSeparationVolatility.LST.pdf"> 
+               <b>(pdf,2.3M)</b></a>,
+ISU Economics Working Paper #09009, Latest Revision March 2010.
+        
+  
+<p>
+<li>Hongyan Li, Junjie Sun, and Leigh Tesfatsion (2008), <b>"Dynamic LMP Response Under Alternative Price-Cap and Price-Sensitive Demand Scenarios"</b>
+   <a href = "http://www.econ.iastate.edu/tesfatsi/DynamicLMPResponse.IEEEPES2008.LST.pdf">
+               <b>(pdf,465K)</b></a>,
+<i>Proceedings of the IEEE Power and Energy Society General 
+Meeting</i>, Carnegie-Mellon University, Pittsburgh, July 20-24.
+
+      
+   
+<p>
+<li>
+<a name = "SYZ2002">Mohammed Shahidehpour, Hatim Yamin, and Zuyi Li (2002)</a>, <b>Market Operations in Electric Power Systems</b>, IEEE, Wiley-Interscience.
+
+
+<p>
+<li>
+Abhishek Somani and Leigh Tesfatsion, <b>"An Agent-Based Testbed Study of Wholesale Power Market Performance Measures"</b>
+   <a href = "http://www.econ.iastate.edu/tesfatsi/AMESPerformanceMeasures.ASLT.IEEECIM2008.pdf">
+                  <b>(pdf,2.8M)</b></a>,
+<i>IEEE Computational Intelligence Magazine</i>, Volume 3, Number 4, November 2008, pages 56-72. 
+    
+   
+<p>
+<li><a name = "SunTes2007a">Junjie Sun and Leigh Tesfatsion (2007a)</a>, <b>"Dynamic Testing of Wholesale Power Market Designs: An Open-Source Agent-Based Framework"</b>, <i>Computational Economics</i>, Volume 30, Number 3, pp. 291-327.  
+    <dd><b><i>Note:</i></b> This article is an abridged version of ISU Economics Working Paper No. 06025 
+     <a href = "http://www.econ.iastate.edu/tesfatsi/DynTestAMES.JSLT.pdf">
+                <b>(pdf,2.2MB)</b></a>,
+July 2007. The working paper provides a detailed description of the AMES Wholesale Power Market Testbed (Version 1.0) together with illustrative experimental findings. 
+
+    </dl>
+
+
+
+<p>
+<li><a name = "SunTes2007b">Junjie Sun and Leigh Tesfatsion (2007b)</a>, <b>"An Agent-Based Computational Laboratory for Wholesale Power Market Design"</b>
+         <a href = "http://www.econ.iastate.edu/tesfatsi/DynTest.IEEEPES2007.JSLT.pdf">
+            <b>(pdf,724K)</b></a>,
+<i>Proceedings of the IEEE Power and Energy Society General Meeting</i>, Tampa, Florida, June 2007. 
+   
+
+<p>
+<li><a name = "SunTes2007c">Junjie Sun and Leigh Tesfatsion (2007c)</a>, <b>"DC Optimal Power Flow Formulation and Testing Using QuadProgJ"</b>
+            <a href = "http://www.econ.iastate.edu/tesfatsi/DC-OPF.JSLT.pdf">
+                          <b>(pdf,543K)</b></a>,
+ISU Economics Working Paper No. 06014, Department of Economics, Iowa State University, 2007. 
+
+   
+  </dl>
+
+
+
+<p>
+<li><a name ="SunTes2007d">Junjie Sun and Leigh Tesfatsion (2007d)</a>, <b>"Open-Source Software for Power Industry Research, Teaching, and Training: A DC-OPF Illustration"</b>
+         <a href = "http://www.econ.iastate.edu/tesfatsi/DC-OPF.IEEEPES2007.JSLT.pdf">
+            <b>(pdf,115K)</b></a>,
+<i>Proceedings of the IEEE Power and Energy Society General Meeting</i>, Tampa, Florida, June 2007. 
+    
+<p>
+<li><a name = "WST2006">Steven Widergren, Junjie Sun, and Leigh Tesfatsion (2006)</a>, <b>"Market Design Test Environments"</b>
+    <a href = "http://www.econ.iastate.edu/tesfatsi/MDTestEnvironment.2006IEEEPES.pdf">
+                    <b>(pdf,136K)</b></a>, 
+<i>Proceedings of the IEEE Power and Energy Society General 
+Meeting</i>, Montreal, June 2006.    
+   
+
+
+                     </ul>
+
+<p>
+<img src="images/bfadebar.gif" height="9" width=100%>
+
+<p>
+<h1> <img src="images/raincube.gif" width="25" height="19">
+<a name = "Acknowledge">A</a>cknowledgements</h1>
+
+<dl>
+
+<p>
+<dd>The work reported at this site has been supported in part by Grant NSF-0527460 awarded by the National Science Foundation and by grants and contracts awarded by the ISU Electric Power Research Center and the Pacific Northwest National Laboratory.  
+
+</dl>      
+
+
+<p>
+<img src="images/bfadebar.gif" height=12 width=100%>
+
+</body>
+</html>
+
+
+

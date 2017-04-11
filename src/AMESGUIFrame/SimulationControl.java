@@ -1,0 +1,1165 @@
+/* ============================================================================
+ * AMES Wholesale Power Market Test Bed (Java): A Free Open-Source Test-Bed
+ *         for the Agent-based Modeling of Electricity Systems
+ * ============================================================================
+ *
+ * (C) Copyright 2008, by Hongyan Li, Junjie Sun, and Leigh Tesfatsion
+ *
+ *    Homepage: http://www.econ.iastate.edu/tesfatsi/AMESMarketHome.htm
+ *
+ * LICENSING TERMS
+ * The AMES Market Package is licensed by the copyright holders (Junjie Sun,
+ * Hongyan Li, and Leigh Tesfatsion) as free open-source software under the
+ * terms of the GNU General Public License (GPL). Anyone who is interested is
+ * allowed to view, modify, and/or improve upon the code used to produce this
+ * package, but any software generated using all or part of this code must be
+ * released as free open-source software in turn. The GNU GPL can be viewed in
+ * its entirety as in the following site: http://www.gnu.org/licenses/gpl.html
+ */
+
+/*
+ * SimulationControl.java
+ *
+ * Created on June 14, 2007, 2:32 PM
+ */
+
+package AMESGUIFrame;
+
+
+import java.util.Date;
+
+import javax.swing.JOptionPane;
+
+import amesmarket.Support;
+
+public class SimulationControl extends javax.swing.JFrame {
+
+	/** Creates new form SimulationControl
+	 * @param frame
+	 * @param bShow
+	 */
+	public SimulationControl(AMESFrame frame, boolean bShow) {
+		this.amesFrame=frame;
+		this.bPrevNextButtonShown=bShow;
+		this.bOkSelect=false;
+
+		this.initComponents();
+		this.MaximumDayCheckBox.setSelected(this.bMaximumDay);
+		this.ThresholdCheckBox.setSelected(this.bThreshold);
+		this.DailyNetEarningThresholdCheckBox.setSelected(this.bDailyNetEarningThreshold);
+		this.ActionProbabilityCheckBox.setSelected(this.bActionProbabilityCheck);
+		this.LearningParameterCheckBox.setSelected(this.bLearningCheck);
+
+		if(this.bPrevNextButtonShown) {
+			this.setTitle("Step 6: Simulation control parameters");
+			this.CancelButton.setVisible(false);
+			this.OKButton.setVisible(false);
+		}
+		else {
+			this.setTitle("Simulation control parameters");
+			this.PrevButton.setVisible(false);
+			this.DoneButton.setVisible(false);
+		}
+	}
+
+	public void SetInitParameters(int iMax, boolean bMax, double dThreshold, boolean bThresh, double dEarningThreshold, boolean bEarningThresh, int iEarningStart, int iEarningLength, int iStart, int iLength, double dCheck, boolean bCheck, int iLearnStart, int iLearnLength, double dLearnCheck, boolean bLearnCheck, double dGCap, double dLseCap, long lRandom) {
+		this.iMaxDay=iMax;
+		this.bMaximumDay=bMax;
+		this.dThresholdProbability=dThreshold;
+		this.dDailyNetEarningThreshold=dEarningThreshold;
+		this.bDailyNetEarningThreshold=bEarningThresh;
+		this.iDailyNetEarningStartDay=iEarningStart;
+		this.iDailyNetEarningDayLength=iEarningLength;
+		this.iStartDay=iStart;
+		this.iCheckDayLength=iLength;
+		this.dActionProbability=dCheck;
+		this.bActionProbabilityCheck=bCheck;
+		this.iLearningCheckStartDay=iLearnStart;
+		this.iLearningCheckDayLength=iLearnLength;
+		this.dLearningCheckDifference=dLearnCheck;
+		this.bLearningCheck=bLearnCheck;
+		this.bThreshold=bThresh;
+		this.dGenPriceCap=dGCap;
+		this.dLSEPriceCap=dLseCap;
+		this.RandomSeed=lRandom;
+
+		this.MaxDayTextField.setText(String.valueOf(this.iMaxDay));
+		this.ThresholdProbabilityTextField.setText(String.valueOf(this.dThresholdProbability));
+		this.DailyNetEarningsThresholdTextField.setText(String.valueOf(this.dDailyNetEarningThreshold));
+		this.DailyNetEarningStartDayTextField.setText(String.valueOf(this.iDailyNetEarningStartDay));
+		this.DailyNetEarningDayLengthTextField.setText(String.valueOf(this.iDailyNetEarningDayLength));
+		this.StartDayTextField.setText(String.valueOf(this.iStartDay));
+		this.CheckDayLengthTextField.setText(String.valueOf(this.iCheckDayLength));
+		this.ProbabilityDifferenceTextField.setText(String.valueOf(this.dActionProbability));
+		this.LearningCheckStartDayTextField.setText(String.valueOf(this.iLearningCheckStartDay));
+		this.LearningCheckDayLengthTextField.setText(String.valueOf(this.iLearningCheckDayLength));
+		this.LearningCheckDifferenceTextField.setText(String.valueOf(this.dLearningCheckDifference));
+		this.GenPriceCapTextField.setText(String.valueOf(this.dGenPriceCap));
+		this.LSEPriceCapTextField.setText(String.valueOf(this.dLSEPriceCap));
+		this.RandomSeedTextField.setText(String.valueOf(this.RandomSeed));
+		this.MaximumDayCheckBox.setSelected(this.bMaximumDay);
+		this.ThresholdCheckBox.setSelected(this.bThreshold);
+		this.DailyNetEarningThresholdCheckBox.setSelected(this.bDailyNetEarningThreshold);
+		this.ActionProbabilityCheckBox.setSelected(this.bActionProbabilityCheck);
+		this.LearningParameterCheckBox.setSelected(this.bLearningCheck);
+	}
+
+	/** This method is called from within the constructor to
+	 * initialize the form.
+	 * WARNING: Do NOT modify this code. The content of this method is
+	 * always regenerated by the Form Editor.
+	 */
+	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+	private void initComponents() {
+
+		this.radioButtonGroup = new javax.swing.ButtonGroup();
+		this.jPanel1 = new javax.swing.JPanel();
+		this.MaxDayTextField = new javax.swing.JTextField();
+		this.ThresholdProbabilityTextField = new javax.swing.JTextField();
+		this.MaximumDayCheckBox = new javax.swing.JCheckBox();
+		this.ThresholdCheckBox = new javax.swing.JCheckBox();
+		this.jPanel4 = new javax.swing.JPanel();
+		this.ActionProbabilityCheckBox = new javax.swing.JCheckBox();
+		this.jLabel9 = new javax.swing.JLabel();
+		this.StartDayTextField = new javax.swing.JTextField();
+		this.jLabel10 = new javax.swing.JLabel();
+		this.CheckDayLengthTextField = new javax.swing.JTextField();
+		this.jLabel11 = new javax.swing.JLabel();
+		this.ProbabilityDifferenceTextField = new javax.swing.JTextField();
+		this.jPanel5 = new javax.swing.JPanel();
+		this.LearningParameterCheckBox = new javax.swing.JCheckBox();
+		this.jLabel12 = new javax.swing.JLabel();
+		this.LearningCheckStartDayTextField = new javax.swing.JTextField();
+		this.jLabel13 = new javax.swing.JLabel();
+		this.LearningCheckDayLengthTextField = new javax.swing.JTextField();
+		this.jLabel14 = new javax.swing.JLabel();
+		this.LearningCheckDifferenceTextField = new javax.swing.JTextField();
+		this.jPanel6 = new javax.swing.JPanel();
+		this.DailyNetEarningThresholdCheckBox = new javax.swing.JCheckBox();
+		this.jLabel15 = new javax.swing.JLabel();
+		this.DailyNetEarningStartDayTextField = new javax.swing.JTextField();
+		this.jLabel16 = new javax.swing.JLabel();
+		this.DailyNetEarningDayLengthTextField = new javax.swing.JTextField();
+		this.DailyNetEarningThresholdTextField = new javax.swing.JLabel();
+		this.DailyNetEarningsThresholdTextField = new javax.swing.JTextField();
+		this.jPanel2 = new javax.swing.JPanel();
+		this.jLabel1 = new javax.swing.JLabel();
+		this.RandomSeedTextField = new javax.swing.JTextField();
+		this.GenerateButton = new javax.swing.JButton();
+		this.OKButton = new javax.swing.JButton();
+		this.CancelButton = new javax.swing.JButton();
+		this.PrevButton = new javax.swing.JButton();
+		this.DoneButton = new javax.swing.JButton();
+		this.jPanel3 = new javax.swing.JPanel();
+		this.GenPriceCapTextField = new javax.swing.JTextField();
+		this.jLabel2 = new javax.swing.JLabel();
+		this.jLabel3 = new javax.swing.JLabel();
+		this.LSEPriceCapTextField = new javax.swing.JTextField();
+
+		this.jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Stopping Rule", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12))); // NOI18N
+		this.jPanel1.setFont(new java.awt.Font("Arial", 0, 12));
+
+		this.MaxDayTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.MaxDayTextField.setText("3");
+		this.MaxDayTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.MaxDayTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.MaxDayTextFieldActionPerformed(evt);
+			}
+		});
+
+		this.ThresholdProbabilityTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.ThresholdProbabilityTextField.setText("0.999");
+		this.ThresholdProbabilityTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.MaximumDayCheckBox.setFont(new java.awt.Font("Arial", 0, 12));
+		this.MaximumDayCheckBox.setText("Maximum Day");
+		this.MaximumDayCheckBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.MaximumDayCheckBox.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.MaximumDayCheckBoxActionPerformed(evt);
+			}
+		});
+
+		this.ThresholdCheckBox.setFont(new java.awt.Font("Arial", 0, 12));
+		this.ThresholdCheckBox.setText("Threshold Probability");
+		this.ThresholdCheckBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.ThresholdCheckBox.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.ThresholdCheckBoxActionPerformed(evt);
+			}
+		});
+
+		this.jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+		this.ActionProbabilityCheckBox.setFont(new java.awt.Font("Arial", 0, 12));
+		this.ActionProbabilityCheckBox.setText("Action Probability Check");
+		this.ActionProbabilityCheckBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.ActionProbabilityCheckBox.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.ActionProbabilityCheckBoxActionPerformed(evt);
+			}
+		});
+
+		this.jLabel9.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel9.setText("Start Day:");
+		this.jLabel9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.StartDayTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.StartDayTextField.setText("0");
+		this.StartDayTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.StartDayTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.StartDayTextFieldActionPerformed(evt);
+			}
+		});
+
+		this.jLabel10.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel10.setText("Consecutive Day Length:");
+		this.jLabel10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.CheckDayLengthTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.CheckDayLengthTextField.setText("0");
+		this.CheckDayLengthTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.CheckDayLengthTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.CheckDayLengthTextFieldActionPerformed(evt);
+			}
+		});
+
+		this.jLabel11.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel11.setText("Probability Difference:");
+		this.jLabel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.ProbabilityDifferenceTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.ProbabilityDifferenceTextField.setText("0");
+		this.ProbabilityDifferenceTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.ProbabilityDifferenceTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.ProbabilityDifferenceTextFieldActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(this.jPanel4);
+		this.jPanel4.setLayout(jPanel4Layout);
+		jPanel4Layout.setHorizontalGroup(
+				jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel4Layout.createSequentialGroup()
+						.addComponent(this.ActionProbabilityCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGap(180, 180, 180))
+				.addGroup(jPanel4Layout.createSequentialGroup()
+						.addGap(25, 25, 25)
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addGroup(jPanel4Layout.createSequentialGroup()
+										.addComponent(this.jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(33, 33, 33)
+										.addComponent(this.ProbabilityDifferenceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+										.addGroup(jPanel4Layout.createSequentialGroup()
+												.addComponent(this.jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addGap(33, 33, 33)
+												.addComponent(this.CheckDayLengthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGroup(jPanel4Layout.createSequentialGroup()
+												.addComponent(this.jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(this.StartDayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+						.addContainerGap())
+				);
+		jPanel4Layout.setVerticalGroup(
+				jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel4Layout.createSequentialGroup()
+						.addComponent(this.ActionProbabilityCheckBox)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel9)
+								.addComponent(this.StartDayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel10)
+								.addComponent(this.CheckDayLengthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel11)
+								.addComponent(this.ProbabilityDifferenceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+
+		this.jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+		this.LearningParameterCheckBox.setFont(new java.awt.Font("Arial", 0, 12));
+		this.LearningParameterCheckBox.setText("Action Stability Check");
+		this.LearningParameterCheckBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.LearningParameterCheckBox.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.LearningParameterCheckBoxActionPerformed(evt);
+			}
+		});
+
+		this.jLabel12.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel12.setText("Start Day:");
+		this.jLabel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.LearningCheckStartDayTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.LearningCheckStartDayTextField.setText("0");
+		this.LearningCheckStartDayTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.LearningCheckStartDayTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.LearningCheckStartDayTextFieldActionPerformed(evt);
+			}
+		});
+
+		this.jLabel13.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel13.setText("Consecutive Day Length:");
+		this.jLabel13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.LearningCheckDayLengthTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.LearningCheckDayLengthTextField.setText("0");
+		this.LearningCheckDayLengthTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.LearningCheckDayLengthTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.LearningCheckDayLengthTextFieldActionPerformed(evt);
+			}
+		});
+
+		this.jLabel14.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel14.setText("Difference:");
+		this.jLabel14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.LearningCheckDifferenceTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.LearningCheckDifferenceTextField.setText("0");
+		this.LearningCheckDifferenceTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.LearningCheckDifferenceTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.LearningCheckDifferenceTextFieldActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(this.jPanel5);
+		this.jPanel5.setLayout(jPanel5Layout);
+		jPanel5Layout.setHorizontalGroup(
+				jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel5Layout.createSequentialGroup()
+						.addComponent(this.LearningParameterCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGap(180, 180, 180))
+				.addGroup(jPanel5Layout.createSequentialGroup()
+						.addGap(25, 25, 25)
+						.addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addGroup(jPanel5Layout.createSequentialGroup()
+										.addComponent(this.jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(33, 33, 33)
+										.addComponent(this.LearningCheckDifferenceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+										.addGroup(jPanel5Layout.createSequentialGroup()
+												.addComponent(this.jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addGap(33, 33, 33)
+												.addComponent(this.LearningCheckDayLengthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGroup(jPanel5Layout.createSequentialGroup()
+												.addComponent(this.jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(this.LearningCheckStartDayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+						.addContainerGap())
+				);
+		jPanel5Layout.setVerticalGroup(
+				jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel5Layout.createSequentialGroup()
+						.addComponent(this.LearningParameterCheckBox)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel12)
+								.addComponent(this.LearningCheckStartDayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel13)
+								.addComponent(this.LearningCheckDayLengthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel14)
+								.addComponent(this.LearningCheckDifferenceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+
+		this.jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+		this.DailyNetEarningThresholdCheckBox.setFont(new java.awt.Font("Arial", 0, 12));
+		this.DailyNetEarningThresholdCheckBox.setText("Daily Net Earnings Threshold");
+		this.DailyNetEarningThresholdCheckBox.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.DailyNetEarningThresholdCheckBox.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.DailyNetEarningThresholdCheckBoxActionPerformed(evt);
+			}
+		});
+
+		this.jLabel15.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel15.setText("Start Day:");
+		this.jLabel15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.DailyNetEarningStartDayTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.DailyNetEarningStartDayTextField.setText("1");
+		this.DailyNetEarningStartDayTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.DailyNetEarningStartDayTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.DailyNetEarningStartDayTextFieldActionPerformed(evt);
+			}
+		});
+
+		this.jLabel16.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel16.setText("Consecutive Day Length:");
+		this.jLabel16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.DailyNetEarningDayLengthTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.DailyNetEarningDayLengthTextField.setText("0");
+		this.DailyNetEarningDayLengthTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.DailyNetEarningDayLengthTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.DailyNetEarningDayLengthTextFieldActionPerformed(evt);
+			}
+		});
+
+		this.DailyNetEarningThresholdTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.DailyNetEarningThresholdTextField.setText("Threshold:");
+		this.DailyNetEarningThresholdTextField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.DailyNetEarningsThresholdTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.DailyNetEarningsThresholdTextField.setText("10.0");
+		this.DailyNetEarningsThresholdTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.DailyNetEarningsThresholdTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.DailyNetEarningsThresholdTextFieldActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(this.jPanel6);
+		this.jPanel6.setLayout(jPanel6Layout);
+		jPanel6Layout.setHorizontalGroup(
+				jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel6Layout.createSequentialGroup()
+						.addComponent(this.DailyNetEarningThresholdCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGap(180, 180, 180))
+				.addGroup(jPanel6Layout.createSequentialGroup()
+						.addGap(25, 25, 25)
+						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addGroup(jPanel6Layout.createSequentialGroup()
+										.addComponent(this.DailyNetEarningThresholdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(33, 33, 33)
+										.addComponent(this.DailyNetEarningsThresholdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+								.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+										.addGroup(jPanel6Layout.createSequentialGroup()
+												.addComponent(this.jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addGap(33, 33, 33)
+												.addComponent(this.DailyNetEarningDayLengthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGroup(jPanel6Layout.createSequentialGroup()
+												.addComponent(this.jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(this.DailyNetEarningStartDayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+						.addContainerGap())
+				);
+		jPanel6Layout.setVerticalGroup(
+				jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel6Layout.createSequentialGroup()
+						.addComponent(this.DailyNetEarningThresholdCheckBox)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel15)
+								.addComponent(this.DailyNetEarningStartDayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel16)
+								.addComponent(this.DailyNetEarningDayLengthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.DailyNetEarningThresholdTextField)
+								.addComponent(this.DailyNetEarningsThresholdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(this.jPanel1);
+		this.jPanel1.setLayout(jPanel1Layout);
+		jPanel1Layout.setHorizontalGroup(
+				jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(jPanel1Layout.createSequentialGroup()
+										.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+												.addGroup(jPanel1Layout.createSequentialGroup()
+														.addComponent(this.MaximumDayCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+														.addGap(31, 31, 31))
+												.addComponent(this.ThresholdCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+												.addComponent(this.MaxDayTextField)
+												.addComponent(this.ThresholdProbabilityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGap(49, 49, 49))
+								.addGroup(jPanel1Layout.createSequentialGroup()
+										.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+												.addComponent(this.jPanel6, javax.swing.GroupLayout.Alignment.LEADING, 0, 319, Short.MAX_VALUE)
+												.addComponent(this.jPanel5, javax.swing.GroupLayout.Alignment.LEADING, 0, 319, Short.MAX_VALUE)
+												.addComponent(this.jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+										.addContainerGap())))
+				);
+		jPanel1Layout.setVerticalGroup(
+				jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel1Layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+								.addGroup(jPanel1Layout.createSequentialGroup()
+										.addComponent(this.MaximumDayCheckBox)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(this.ThresholdCheckBox))
+								.addGroup(jPanel1Layout.createSequentialGroup()
+										.addComponent(this.MaxDayTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(this.ThresholdProbabilityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+						.addComponent(this.jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(this.jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(this.jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+
+		this.jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Random Seed", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12))); // NOI18N
+
+		this.jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel1.setText("Random Seed:");
+		this.jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.RandomSeedTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.RandomSeedTextField.setText("695672061");
+		this.RandomSeedTextField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.RandomSeedTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.RandomSeedTextFieldActionPerformed(evt);
+			}
+		});
+
+		this.GenerateButton.setFont(new java.awt.Font("Arial", 0, 12));
+		this.GenerateButton.setText("Generate");
+		this.GenerateButton.setToolTipText("Generate a random seed using current time");
+		this.GenerateButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.GenerateButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.GenerateButtonActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(this.jPanel2);
+		this.jPanel2.setLayout(jPanel2Layout);
+		jPanel2Layout.setHorizontalGroup(
+				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel2Layout.createSequentialGroup()
+						.addGap(35, 35, 35)
+						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+								.addComponent(this.GenerateButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(this.jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(this.RandomSeedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGap(86, 86, 86))
+				);
+		jPanel2Layout.setVerticalGroup(
+				jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel2Layout.createSequentialGroup()
+						.addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel1)
+								.addComponent(this.RandomSeedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(this.GenerateButton)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+
+		this.OKButton.setFont(new java.awt.Font("Arial", 0, 12));
+		this.OKButton.setText("Ok");
+		this.OKButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.OKButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.OKButtonActionPerformed(evt);
+			}
+		});
+
+		this.CancelButton.setFont(new java.awt.Font("Arial", 0, 12));
+		this.CancelButton.setText("Cancel");
+		this.CancelButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.CancelButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		this.CancelButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.CancelButtonActionPerformed(evt);
+			}
+		});
+
+		this.PrevButton.setFont(new java.awt.Font("Arial", 0, 12));
+		this.PrevButton.setText("<< Prev");
+		this.PrevButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.PrevButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.PrevButtonActionPerformed(evt);
+			}
+		});
+
+		this.DoneButton.setFont(new java.awt.Font("Arial", 0, 12));
+		this.DoneButton.setText("Done");
+		this.DoneButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.DoneButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.DoneButtonActionPerformed(evt);
+			}
+		});
+
+		this.jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Price Cap", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12))); // NOI18N
+
+		this.GenPriceCapTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.GenPriceCapTextField.setText("1000");
+		this.GenPriceCapTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel2.setText("Max Reported Price For GenCos:");
+		this.jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
+		this.jLabel3.setText("Min Reported Price For LSEs:");
+		this.jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+		this.LSEPriceCapTextField.setFont(new java.awt.Font("Arial", 0, 12));
+		this.LSEPriceCapTextField.setText("0");
+		this.LSEPriceCapTextField.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+		this.LSEPriceCapTextField.addActionListener(new java.awt.event.ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				SimulationControl.this.LSEPriceCapTextFieldActionPerformed(evt);
+			}
+		});
+
+		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(this.jPanel3);
+		this.jPanel3.setLayout(jPanel3Layout);
+		jPanel3Layout.setHorizontalGroup(
+				jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel3Layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(this.jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+								.addComponent(this.jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+						.addGap(28, 28, 28)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(this.GenPriceCapTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(this.LSEPriceCapTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addGap(31, 31, 31))
+				);
+		jPanel3Layout.setVerticalGroup(
+				jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(jPanel3Layout.createSequentialGroup()
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.jLabel2)
+								.addComponent(this.GenPriceCapTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+								.addComponent(this.LSEPriceCapTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addComponent(this.jLabel3))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
+		this.getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(this.jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addGroup(layout.createSequentialGroup()
+										.addGap(26, 26, 26)
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+												.addComponent(this.jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(this.jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)))
+								.addGroup(layout.createSequentialGroup()
+										.addGap(48, 48, 48)
+										.addComponent(this.OKButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(18, 18, 18)
+										.addComponent(this.CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(18, 18, 18)
+										.addComponent(this.PrevButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(16, 16, 16)
+										.addComponent(this.DoneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+		layout.setVerticalGroup(
+				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+								.addComponent(this.jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+								.addGroup(layout.createSequentialGroup()
+										.addComponent(this.jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(this.jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addGap(264, 264, 264)
+										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+												.addComponent(this.DoneButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(this.PrevButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(this.CancelButton)
+												.addComponent(this.OKButton))
+										.addGap(9, 9, 9)))
+						.addContainerGap())
+				);
+
+		this.pack();
+	}// </editor-fold>//GEN-END:initComponents
+
+	private void DoneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoneButtonActionPerformed
+		this.setVisible(false);
+
+		// Verify Data
+		String strError=this.amesFrame.checkCaseData();
+		if(!strError.isEmpty()) {
+			JOptionPane.showMessageDialog(this, strError, "Case Data Verify Message", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		this.amesFrame.setbLoadCase(true);
+		this.amesFrame.setbCaseResult(false);
+		this.amesFrame.enableCaseMenuAndToolBar();
+		this.amesFrame.enableCommandMenuAndToolbar();
+		this.amesFrame.enableOptionsMenu();
+		this.amesFrame.disableViewMenu();
+		this.amesFrame.InitializeAMESMarket();
+	}//GEN-LAST:event_DoneButtonActionPerformed
+
+	private void PrevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevButtonActionPerformed
+		this.setVisible(false);
+		this.amesFrame.activeConfig5();
+		//GEN-LAST:event_PrevButtonActionPerformed
+	}
+
+	private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
+		this.setVisible(false);
+	}//GEN-LAST:event_CancelButtonActionPerformed
+
+	private void OKButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKButtonActionPerformed
+		String strError=this.DataVerify();
+		if(!strError.isEmpty()) {
+			JOptionPane.showMessageDialog(this, strError, "Case Data Verify Message", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		this.amesFrame.simulationControl.SetInitParameters(this.iMaxDay, this.bMaximumDay, this.dThresholdProbability, this.bThreshold, this.dDailyNetEarningThreshold, this.bDailyNetEarningThreshold, this.iDailyNetEarningStartDay, this.iDailyNetEarningDayLength, this.iStartDay, this.iCheckDayLength, this.dActionProbability, this.bActionProbabilityCheck, //
+				this.iLearningCheckStartDay, this.iLearningCheckDayLength, this.dLearningCheckDifference, this.bLearningCheck, this.dGenPriceCap, this.dLSEPriceCap, this.RandomSeed);
+
+		strError=this.amesFrame.checkCaseData();
+		if(!strError.isEmpty()) {
+			JOptionPane.showMessageDialog(this, strError, "Case Data Verify Message", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		this.amesFrame.setbLoadCase(true);
+		this.amesFrame.setbCaseResult(false);
+		this.amesFrame.enableCaseMenuAndToolBar();
+		this.amesFrame.enableCommandMenuAndToolbar();
+		this.amesFrame.enableOptionsMenu();
+		this.amesFrame.disableViewMenu();
+		this.amesFrame.InitializeAMESMarket();
+		this.setVisible(false);
+	}//GEN-LAST:event_OKButtonActionPerformed
+
+	public String DataVerify() {
+		String strTemp=this.MaxDayTextField.getText();
+		int iTemp;
+		double dTemp;
+
+		String message="The Maximum Day paramter should bigger than 0!";
+		try {
+			iTemp=Integer.parseInt(strTemp);
+
+			if(iTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.iMaxDay=iTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.ThresholdProbabilityTextField.getText();
+		message="The Threshold Probability paramter should between 0 and 1.0!";
+		try {
+			dTemp=Support.parseDouble(strTemp);
+
+			if((dTemp<0)||(dTemp>1.0)) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.dThresholdProbability=dTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.DailyNetEarningStartDayTextField.getText();
+		message="The Daily Net Earning Start Day paramter should bigger than 0!";
+		try {
+			iTemp=Integer.parseInt(strTemp);
+
+			if(iTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.iDailyNetEarningStartDay=iTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.DailyNetEarningDayLengthTextField.getText();
+		message="The Daily Net Earning Consecutive Day Length paramter should bigger than 0!";
+		try {
+			iTemp=Integer.parseInt(strTemp);
+
+			if(iTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.iDailyNetEarningDayLength=iTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.DailyNetEarningsThresholdTextField.getText();
+		message="The Daily Net Earning Threshold paramter should bigger than 0.0!";
+		try {
+			dTemp=Support.parseDouble(strTemp);
+
+			if(dTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.dDailyNetEarningThreshold=dTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.StartDayTextField.getText();
+		message="The Start Day paramter should bigger than 0!";
+		try {
+			iTemp=Integer.parseInt(strTemp);
+
+			if(iTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.iStartDay=iTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.CheckDayLengthTextField.getText();
+		message="The Consecutive Day Length paramter should bigger than 0!";
+		try {
+			iTemp=Integer.parseInt(strTemp);
+
+			if(iTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.iCheckDayLength=iTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.ProbabilityDifferenceTextField.getText();
+		message="The Probability Difference paramter should bigger than 0!";
+		try {
+			dTemp=Support.parseDouble(strTemp);
+
+			if(dTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.dActionProbability=dTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.LearningCheckStartDayTextField.getText();
+		message="The Start Day paramter should bigger than 0!";
+		try {
+			iTemp=Integer.parseInt(strTemp);
+
+			if(iTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.iLearningCheckStartDay=iTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.LearningCheckDayLengthTextField.getText();
+		message="The Consecutive Day Length paramter should bigger than 0!";
+		try {
+			iTemp=Integer.parseInt(strTemp);
+
+			if(iTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.iLearningCheckDayLength=iTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.LearningCheckDifferenceTextField.getText();
+		message="The Probability Difference paramter should bigger than 0!";
+		try {
+			dTemp=Support.parseDouble(strTemp);
+
+			if(dTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.dLearningCheckDifference=dTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.GenPriceCapTextField.getText();
+		message="The GenCos PriceCap paramter should bigger than 0!";
+		try {
+			dTemp=Support.parseDouble(strTemp);
+
+			if(dTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.dGenPriceCap=dTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		strTemp=this.LSEPriceCapTextField.getText();
+		message="The LSE PriceCap paramter should bigger than 0!";
+		try {
+			dTemp=Support.parseDouble(strTemp);
+
+			if(dTemp<0) {
+				JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+				return message;
+			} else {
+				this.dLSEPriceCap=dTemp;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		message="The random seed is error!";
+		strTemp=this.RandomSeedTextField.getText();
+		long lTemp;
+		try {
+			lTemp=Long.parseLong(strTemp);
+
+			this.RandomSeed=lTemp;
+		}
+		catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, message, "Error Message", JOptionPane.ERROR_MESSAGE);
+			return message;
+		}
+
+		this.amesFrame.SetSimulationParameters(this.iMaxDay, this.bMaximumDay, this.dThresholdProbability, this.bThreshold, this.dDailyNetEarningThreshold, this.bDailyNetEarningThreshold, this.iDailyNetEarningStartDay, this.iDailyNetEarningDayLength,
+				this.iStartDay, this.iCheckDayLength, this.dActionProbability, this.bActionProbabilityCheck, this.iLearningCheckStartDay, this.iLearningCheckDayLength, this.dLearningCheckDifference, this.bLearningCheck, this.dGenPriceCap, this.dLSEPriceCap, this.RandomSeed);
+
+		return "";
+	}
+
+	private void GenerateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerateButtonActionPerformed
+		Date time=new Date();
+		java.util.Random randomSeed = new java.util.Random(time.getTime());
+
+		this.RandomSeed=randomSeed.nextLong();
+		this.RandomSeedTextField.setText(String.valueOf(this.RandomSeed));
+	}//GEN-LAST:event_GenerateButtonActionPerformed
+
+	private void MaximumDayCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaximumDayCheckBoxActionPerformed
+		this.bMaximumDay=!this.bMaximumDay;
+	}//GEN-LAST:event_MaximumDayCheckBoxActionPerformed
+
+	private void ThresholdCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThresholdCheckBoxActionPerformed
+		this.bThreshold=!this.bThreshold;
+	}//GEN-LAST:event_ThresholdCheckBoxActionPerformed
+
+	private void LSEPriceCapTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LSEPriceCapTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_LSEPriceCapTextFieldActionPerformed
+
+	private void MaxDayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaxDayTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_MaxDayTextFieldActionPerformed
+
+	private void RandomSeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RandomSeedTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_RandomSeedTextFieldActionPerformed
+
+	private void ActionProbabilityCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActionProbabilityCheckBoxActionPerformed
+		this.bActionProbabilityCheck=!this.bActionProbabilityCheck;
+	}//GEN-LAST:event_ActionProbabilityCheckBoxActionPerformed
+
+	private void StartDayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartDayTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_StartDayTextFieldActionPerformed
+
+	private void CheckDayLengthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckDayLengthTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_CheckDayLengthTextFieldActionPerformed
+
+	private void ProbabilityDifferenceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProbabilityDifferenceTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_ProbabilityDifferenceTextFieldActionPerformed
+
+	private void LearningParameterCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LearningParameterCheckBoxActionPerformed
+		this.bLearningCheck=!this.bLearningCheck;
+		// TODO add your handling code here:
+	}//GEN-LAST:event_LearningParameterCheckBoxActionPerformed
+
+	private void LearningCheckStartDayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LearningCheckStartDayTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_LearningCheckStartDayTextFieldActionPerformed
+
+	private void LearningCheckDayLengthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LearningCheckDayLengthTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_LearningCheckDayLengthTextFieldActionPerformed
+
+	private void LearningCheckDifferenceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LearningCheckDifferenceTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_LearningCheckDifferenceTextFieldActionPerformed
+
+	private void DailyNetEarningThresholdCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DailyNetEarningThresholdCheckBoxActionPerformed
+		this.bDailyNetEarningThreshold=!this.bDailyNetEarningThreshold;
+		// TODO add your handling code here:
+	}//GEN-LAST:event_DailyNetEarningThresholdCheckBoxActionPerformed
+
+	private void DailyNetEarningStartDayTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DailyNetEarningStartDayTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_DailyNetEarningStartDayTextFieldActionPerformed
+
+	private void DailyNetEarningDayLengthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DailyNetEarningDayLengthTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_DailyNetEarningDayLengthTextFieldActionPerformed
+
+	private void DailyNetEarningsThresholdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DailyNetEarningsThresholdTextFieldActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_DailyNetEarningsThresholdTextFieldActionPerformed
+
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JCheckBox ActionProbabilityCheckBox;
+	private javax.swing.JButton CancelButton;
+	private javax.swing.JTextField CheckDayLengthTextField;
+	private javax.swing.JTextField DailyNetEarningDayLengthTextField;
+	private javax.swing.JTextField DailyNetEarningStartDayTextField;
+	private javax.swing.JCheckBox DailyNetEarningThresholdCheckBox;
+	private javax.swing.JLabel DailyNetEarningThresholdTextField;
+	private javax.swing.JTextField DailyNetEarningsThresholdTextField;
+	private javax.swing.JButton DoneButton;
+	private javax.swing.JTextField GenPriceCapTextField;
+	private javax.swing.JButton GenerateButton;
+	private javax.swing.JTextField LSEPriceCapTextField;
+	private javax.swing.JTextField LearningCheckDayLengthTextField;
+	private javax.swing.JTextField LearningCheckDifferenceTextField;
+	private javax.swing.JTextField LearningCheckStartDayTextField;
+	private javax.swing.JCheckBox LearningParameterCheckBox;
+	private javax.swing.JTextField MaxDayTextField;
+	private javax.swing.JCheckBox MaximumDayCheckBox;
+	private javax.swing.JButton OKButton;
+	private javax.swing.JButton PrevButton;
+	private javax.swing.JTextField ProbabilityDifferenceTextField;
+	private javax.swing.JTextField RandomSeedTextField;
+	private javax.swing.JTextField StartDayTextField;
+	private javax.swing.JCheckBox ThresholdCheckBox;
+	private javax.swing.JTextField ThresholdProbabilityTextField;
+	private javax.swing.JLabel jLabel1;
+	private javax.swing.JLabel jLabel10;
+	private javax.swing.JLabel jLabel11;
+	private javax.swing.JLabel jLabel12;
+	private javax.swing.JLabel jLabel13;
+	private javax.swing.JLabel jLabel14;
+	private javax.swing.JLabel jLabel15;
+	private javax.swing.JLabel jLabel16;
+	private javax.swing.JLabel jLabel2;
+	private javax.swing.JLabel jLabel3;
+	private javax.swing.JLabel jLabel9;
+	private javax.swing.JPanel jPanel1;
+	private javax.swing.JPanel jPanel2;
+	private javax.swing.JPanel jPanel3;
+	private javax.swing.JPanel jPanel4;
+	private javax.swing.JPanel jPanel5;
+	private javax.swing.JPanel jPanel6;
+	private javax.swing.ButtonGroup radioButtonGroup;
+	// End of variables declaration//GEN-END:variables
+	private int iMaxDay;
+	private double dThresholdProbability;
+	private double dGenPriceCap;
+	private double dLSEPriceCap;
+	private long RandomSeed;
+	private int iStartDay;
+	private int iCheckDayLength;
+	private double dActionProbability;
+
+	private int iLearningCheckStartDay;
+	private int iLearningCheckDayLength;
+	private double dLearningCheckDifference;
+
+	private int iDailyNetEarningStartDay;
+	private int iDailyNetEarningDayLength;
+	private double dDailyNetEarningThreshold;
+
+	private boolean bMaximumDay=true;
+	private boolean bThreshold=true;
+	private boolean bDailyNetEarningThreshold=false;
+	private boolean bActionProbabilityCheck=false;
+	private boolean bLearningCheck=false;
+
+	private boolean bOkSelect;
+	private boolean bPrevNextButtonShown;
+
+	private AMESFrame amesFrame;
+}
