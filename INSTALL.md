@@ -99,6 +99,8 @@ The recommended way to install or develop AMES (v4.0) is Eclipse. Other options 
 ![](./images/image3.png)
 - Configure the "PATH" variable in Eclipse to match your system "PATH" variable in "Run Configuration".
     - This step is important since Eclipse should find Python, psst and the solver of your choice
+    - On Windows, you can type `path` in a CMD prompt and take the necessary paths from there and paste them into this value
+    - On Linux, OSX, you can type `echo $PATH` in a terminal and take the necessary paths from there and paste them into this value
 ![](./images/image4.png)
 - Compiling and running AMES requires clicking the "Run" button in Eclipse. Once AMES starts, load the 8 bus test case.
 ![](./images/image5.png)
