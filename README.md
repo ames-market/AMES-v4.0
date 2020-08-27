@@ -1,14 +1,15 @@
 
 # AMES (V4.0)
 
+[Agent based Modeling of Electricity Systems](http://www2.econ.iastate.edu/tesfatsi/AMESMarketHome.htm) V4.0 was developed by Dheepak Krishnamurthy, Sean L. Mooney, Auswin George Thomas, Wanning Li, and Leigh Tesfatsion at Iowa State University.
 
-[Agent based Modeling of Electricity Systems](http://www2.econ.iastate.edu/tesfatsi/AMESMarketHome.htm) (AMES V4.0) is a free open-source computational platform (Java/Python) permitting the small-scale study of U.S. ISO-managed wholesale power markets operating over AC transmission grids with congestion handled by locational marginal pricing.
+AMES V4.0 substantively modifies AMES V2.06 as follows:
 
-AMES (V4.0) extends [AMES (V2.06)](http://www2.econ.iastate.edu/tesfatsi/AMESVersionReleaseHistory.htm) in three key ways:
+* AMES V4.0 models a daily ISO-managed day-ahead market (DAM) formulated either as a deterministic SCUC optimization or as a two-stage stochastic SCUC optimization conditional on a set of user-specified net-load scenarios. These optimizations are based on Load Serving Entity (LSE) demand bids and Generation Company (GenCo) supply offers. DAM settlements are determined on the basis of locational marginal price (LMP) outcomes.
 
-* AMES (V4.0) models a fully operational two-settlement system consisting of an ISO-managed day-ahead market (DAM) settled at DAM LMPs and an ISO-managed real-time market (RTM) settled at RTM LMPs.
-* AMES (V4.0) includes an enhanced modeling of ISO-managed DAM Security-Constrained Unit Commitment (SCUC) that takes into account UC costs such as start-up costs, up-time/down-time constraints, and ramping constraints.
-* AMES (V4.0) includes reserve requirements in its DAM SCUC/SCED and RTM SCED optimal power flow formulations.
+* AMES V4.0 includes an interface to a fast and efficient Python-based solver (Pyomo/PSST) for implementing the daily DAM SCUC optimization in either deterministic or stochastic form.
+
+* AMES V4.0 permits spinning reserve requirements to be included among the system constraints for each optimization. For the stochastic DAM SCUC optimization, this inclusion provides a hedge against net-load scenario specification errors. 
 
 ### Install instructions
 
@@ -26,10 +27,6 @@ The [Usage](https://github.com/kdheepak/AMES-v4.0/blob/master/USAGE.md) describe
 
 AMES source code can be downloaded from [here](https://github.com/kdheepak/AMES-v4.0/repository/archive.zip?ref=master).
 The source can also be viewed online [here](https://github.com/kdheepak/AMES-v4.0/tree/master)
-
-### Contributions
-
-AMES (V4.0) was developed by Dheepak Krishnamurthy, Sean Mooney, Auswin George, Wanning Li and Leigh Tesfatsion.
 
 ### References
 
