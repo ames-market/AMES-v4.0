@@ -13,20 +13,20 @@ AMES V4.0 substantively modifies AMES V2.06 as follows:
 
 ### Install instructions
 
-The [Install](https://github.com/kdheepak/AMES-v4.0/blob/master/INSTALL.md) instructions describes install instructions for different operating systems
+The [Install](https://github.com/ames-market/AMES-v4.0/blob/master/INSTALL.md) instructions describes install instructions for different operating systems.
 
 ### DATA
 
-The DATA folder contains an example of an [8 Bus 8 Generator test case](https://github.com/kdheepak/AMES-v4.0/blob/master/DATA/8BusTestCase_8gen.dat) as an illustrative example of the AMES data format
+The DATA folder contains an example of an [8 Bus 8 Generator test case](https://github.com/ames-market/AMES-v4.0/blob/master/DATA/8BusTestCase_8gen.dat) as an illustrative example of the AMES data format.
 
 ### Usage
 
-The [Usage](https://github.com/kdheepak/AMES-v4.0/blob/master/USAGE.md) describes a list of commonly used settings.
+The [Usage](https://github.com/ames-market/AMES-v4.0/blob/master/USAGE.md) describes a list of commonly used settings.
 
 ### Source
 
-AMES source code can be downloaded from [here](https://github.com/kdheepak/AMES-v4.0/repository/archive.zip?ref=master).
-The source can also be viewed online [here](https://github.com/kdheepak/AMES-v4.0/tree/master)
+AMES source code can be downloaded from [here](https://github.com/ames-market/AMES-v4.0/repository/archive.zip?ref=master).
+The source can also be viewed online [here](https://github.com/ames-market/AMES-v4.0/tree/master).
 
 ### References
 
